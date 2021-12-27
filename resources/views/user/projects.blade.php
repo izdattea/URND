@@ -92,6 +92,7 @@
                                     <td>{{$data->proj_stage}}</td>
                                     <td>{{$data->proj_status}}</td>
                                     <td><a href="edit-project/{{$data->id}}">Edit</a></td>
+                                    <td><a href="edit-members/{{$data->id}}">Edit Members</a></td>
                                 </tr>
                                 @endif
                                 @endforeach

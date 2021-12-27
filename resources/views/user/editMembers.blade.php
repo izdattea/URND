@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Edit Projects</h4>
                         <div class="table-responsive">
-                        <form class="forms-sample" action="/upd/project" method="post">
+                        <form class="forms-sample" action="/upd/members" method="post">
                             @csrf
                             <input type="hidden" class="form-control" name="id" value="{{$data->id}}">
                             

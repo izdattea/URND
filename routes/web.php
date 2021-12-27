@@ -41,6 +41,7 @@ Route::get('edit-project/{id}',[userControl::class, 'showProject']); //show form
 Route::POST('upd/project',[userControl::class, 'updateProject']); //update to db 
 
 Route::get('edit-members/{id}',[userControl::class, 'editMembers']);
+Route::POST('upd/members', [userControl::class, 'updateMembers']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

@@ -46,26 +46,8 @@ class userControl extends Controller
     function projectList()
     {
         $user = Auth::user();
-        // $project = DB::table('projects');
-        // if ($user['name']==$project['proj_leader'])
-        // {
-        //     $data = DB::table('projects')
-        //         ->leftJoin('users', 'projects.proj_manager', '=', 'users.name')
-        //         ->select('projects.*', 'users.name')
-        //         ->get();
-        // } else //other users
-        // {
-        //     $data = DB::table('projects')
-        //         ->leftJoin('users', 'projects.proj_manager', '=', 'users.name')
-        //         ->where('projects.proj_manager', '=', $user['name'])
-        //         ->select('projects.*')
-        //         ->get();
-        // }
-        // $staff = User::where('usertype', '!=', '1')->get();
-        // return view('user.projects', ['staff'=>$staff, 'user'=>$user]);
         $project=Project::all();
         return view('user.projects',['data'=>$project, 'user'=>$user]);
-        // return view('user.projects');
     }
 
     function showProject($id)
@@ -79,8 +61,6 @@ class userControl extends Controller
             ->first();
         return view('user.editProject',['data'=>$data, 'user'=>$user, 'staff'=>$staff]);
 
-        // $staff=Staff::where('usertype', '!=', '1')->get();
-        // return view('user.addProject', ['user'=>$user, 'staff'=>$staff, 'client'=>$client]);
     }
 
     function updateProject(Request $req)
@@ -135,18 +115,6 @@ class userControl extends Controller
         return redirect('project');
     }
 
-    function  addClient(Request $req)
-    {
-        $client = new Client;
-
-        $client->name = $req->name;
-        $client->email = $req->email;
-        $client->phone_number = $req->phone_number;
-        $client->save();
-
-        return redirect('/project');
-    }
-
     function editMembers($id)
     {
         $user=Auth::user();
@@ -157,5 +125,18 @@ class userControl extends Controller
             ->select('projects.*')->get()
             ->first();
         return view('user.editMembers',['data'=>$data, 'user'=>$user, 'staff'=>$staff]);
+    }
+
+    function updateMembers(Request $req)
+    {
+        $members=Project::find($req->id);
+
+        $members->proj_mem1=$req->proj_mem1;
+        $members->proj_mem2=$req->proj_mem2;
+        $members->proj_mem3=$req->proj_mem3;
+        $members->save();
+
+        return redirect('project');
+        
     }
 }
